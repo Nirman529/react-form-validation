@@ -30,15 +30,12 @@ const MyForm = () => {
             return (
                 (data['firstName'].includes(fil.firstName))
                 && (data['lastName'].includes(fil.lastName))
-                && (data['emailAddress'].includes(fil.emailAddress))
+                && (data['emailAddress'].includes
+                    (fil.emailAddress))
             )
         })
-        console.log('e.target.value', e.target.value)
-        console.log('fil', fil)
-        console.log('result', result)
         filterData = result;
         setFilterData([...filterData])
-        console.log('filterData', filterData)
     }
 
     const valueOnChange = (e) => {
@@ -195,7 +192,6 @@ const MyForm = () => {
         let hobbieCheck = obj.hobbies.length < 3
 
         if (isEmpty && hobbieCheck) {
-            console.log('obj', obj)
             if (obj.firstName === '') {
                 errors.firstName = 'Enter your first name'
                 setErrors({ ...errors, firstName: 'Enter your first name' });
@@ -313,11 +309,7 @@ const MyForm = () => {
                         </div>
                         <div className='col justify-content-center align-items-center'>
                             <input type='text' className='form-control m-1' name='firstName' value={obj.firstName} placeholder='Enter your first name' onChange={(e) => valueOnChange(e)} />
-                            {errors.firstName === null ? (
-                                null
-                            ) : (
-                                <><br /><span className='text-danger'>{errors.firstName}</span></>
-                            )}
+                            {errors.firstName === null ? (null) : (<><br /><span className='text-danger'>{errors.firstName}</span></>)}
                         </div>
                     </div>
 
@@ -327,11 +319,7 @@ const MyForm = () => {
                         </div>
                         <div className='col'>
                             <input type='text' className='form-control m-1' name='lastName' value={obj.lastName} placeholder='Enter your last name' onChange={(e) => valueOnChange(e)} />
-                            {errors.lastName === null ? (
-                                null
-                            ) : (
-                                <><br /><span className='text-danger'>{errors.lastName}</span></>
-                            )}
+                            {errors.lastName === null ? (null) : (<><br /><span className='text-danger'>{errors.lastName}</span></>)}
                         </div>
                     </div>
 
@@ -341,11 +329,7 @@ const MyForm = () => {
                         </div>
                         <div className='col'>
                             <input type='date' className='date m-1' name='dateOfBirth' value={obj.dateOfBirth} onChange={(e) => valueOnChange(e)} />
-                            {errors.dateOfBirth === null ? (
-                                null
-                            ) : (
-                                <><br /><span className='text-danger'>{errors.dateOfBirth}</span></>
-                            )}
+                            {errors.dateOfBirth === null ? (null) : (<><br /><span className='text-danger'>{errors.dateOfBirth}</span></>)}
                         </div>
                     </div>
 
@@ -356,11 +340,7 @@ const MyForm = () => {
                         <div className='col justify-content-begin text-begin align-items-center'>
                             <input className='form-check-input m-1' type='radio' name='gender' value='male' checked={obj.gender === 'male'} onChange={(e) => valueOnChange(e)} /> male <br />
                             <input className='form-check-input m-1' type='radio' name='gender' value='female' checked={obj.gender === 'female'} onChange={(e) => valueOnChange(e)} /> female
-                            {errors.gender === null ? (
-                                null
-                            ) : (
-                                <><br /><span className='text-danger'>{errors.gender}</span></>
-                            )}
+                            {errors.gender === null ? (null) : (<><br /><span className='text-danger'>{errors.gender}</span></>)}
                         </div>
                     </div>
 
@@ -370,11 +350,7 @@ const MyForm = () => {
                         </div>
                         <div className='col'>
                             <input type='number' className='form-control m-1' name='contactNumber' value={obj.contactNumber} placeholder='Enter 10 digit phone number' onChange={(e) => valueOnChange(e)} />
-                            {errors.contactNumber === null ? (
-                                null
-                            ) : (
-                                <><br /><span className='text-danger'>{errors.contactNumber}</span></>
-                            )}
+                            {errors.contactNumber === null ? (null) : (<><br /><span className='text-danger'>{errors.contactNumber}</span></>)}
                         </div>
                     </div>
 
@@ -384,11 +360,7 @@ const MyForm = () => {
                         </div>
                         <div className='col'>
                             <input type='text' className='form-control m-1' name='emailAddress' value={obj.emailAddress} placeholder='Enter your email address' onChange={(e) => valueOnChange(e)} />
-                            {errors.emailAddress === null ? (
-                                null
-                            ) : (
-                                <><br /><span className='text-danger'>{errors.emailAddress}</span></>
-                            )}
+                            {errors.emailAddress === null ? (null) : (<><br /><span className='text-danger'>{errors.emailAddress}</span></>)}
                         </div>
                     </div>
 
@@ -398,11 +370,7 @@ const MyForm = () => {
                         </div>
                         <div className='col'>
                             <input type='password' className='form-control m-1' name='password' autoComplete='new-password' value={obj.password} placeholder='Enter your password' onChange={(e) => valueOnChange(e)} />
-                            {errors.password === null ? (
-                                null
-                            ) : (
-                                <><br /><span className='text-danger'>{errors.password}</span></>
-                            )}
+                            {errors.password === null ? (null) : (<><br /><span className='text-danger'>{errors.password}</span></>)}
                         </div>
                     </div>
 
@@ -412,11 +380,7 @@ const MyForm = () => {
                         </div>
                         <div className='col'>
                             <input type='password' className='form-control m-1' name='confirmPassword' autoComplete='new-password' value={obj.confirmPassword} placeholder='Confirm your password' onChange={(e) => valueOnChange(e)} />
-                            {errors.confirmPassword === null ? (
-                                null
-                            ) : (
-                                <><br /><span className='text-danger'>{errors.confirmPassword}</span></>
-                            )}
+                            {errors.confirmPassword === null ? (null) : (<><br /><span className='text-danger'>{errors.confirmPassword}</span></>)}
                         </div>
                     </div>
 
@@ -430,11 +394,7 @@ const MyForm = () => {
                             <input type='checkbox' className='form-check-input m-1' name='hobbies' value='music' checked={obj.hobbies.includes('music')} onChange={(e) => valueOnChange(e)} />music <br />
                             <input type='checkbox' className='form-check-input m-1' name='hobbies' value='reading' checked={obj.hobbies.includes('reading')} onChange={(e) => valueOnChange(e)} />reading <br />
                             <input type='checkbox' className='form-check-input m-1' name='hobbies' value='travelling' checked={obj.hobbies.includes('travelling')} onChange={(e) => valueOnChange(e)} />travelling <br />
-                            {errors.hobbies === null ? (
-                                null
-                            ) : (
-                                <><span className='text-danger'>{errors.hobbies}</span></>
-                            )}
+                            {errors.hobbies === null ? (null) : (<><span className='text-danger'>{errors.hobbies}</span></>)}
                         </div>
                     </div>
 
@@ -444,11 +404,7 @@ const MyForm = () => {
                         </div>
                         <div className='col align-items-center'>
                             <textarea type='textarea' className='form-control m-1' name='information' value={obj.information} placeholder='Enter your relavent information' onChange={(e) => valueOnChange(e)} />
-                            {errors.information === null ? (
-                                null
-                            ) : (
-                                <><br /><span className='text-danger'>{errors.information}</span></>
-                            )}
+                            {errors.information === null ? (null) : (<><br /><span className='text-danger'>{errors.information}</span></>)}
                         </div>
                     </div>
 
