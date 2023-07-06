@@ -8,16 +8,42 @@ const MyForm = () => {
     let firstError = {
         firstName: '', lastName: '', dateOfBirth: '', gender: '', contactNumber: '', emailAddress: '', password: '', confirmPassword: '', hobbies: [], information: '',
     }
+    let firstFilter = {
+        firstName: '', lastName: '', emailAddress: ''
+    }
 
     const [data, setData] = useState([])
     const [obj, setObj] = useState({ ...firstObject })
     const [errors, setErrors] = useState({ ...firstError })
     const [id, setId] = useState(1);
 
+    let [filterData, setFilterData] = useState(data)
+    const [fil, setFil] = useState({ ...firstFilter })
+
+    const handleFilter = (e) => {
+        var result = [];
+        var change = e.target.name.toString()
+        fil[change] = e.target.value
+        setFil({ ...fil })
+
+        result = data.filter((data, index) => {
+            return (
+                (data['firstName'].includes(fil.firstName))
+                && (data['lastName'].includes(fil.lastName))
+                && (data['emailAddress'].includes(fil.emailAddress))
+            )
+        })
+        console.log('e.target.value', e.target.value)
+        console.log('fil', fil)
+        console.log('result', result)
+        filterData = result;
+        setFilterData([...filterData])
+        console.log('filterData', filterData)
+    }
+
     const valueOnChange = (e) => {
-        let switchCon = e.target.name.split('.')[0]
         var numberRe = /\d/;
-        switch (switchCon) {
+        switch (e.target.name) {
             case 'firstName':
                 if (e.target.value) {
                     if (numberRe.test(e.target.value)) {
@@ -140,7 +166,6 @@ const MyForm = () => {
                     errors.hobbies = ''
                 }
                 setErrors({ ...errors })
-                console.log('obj.hobbies', obj.hobbies)
                 break;
 
             case 'information':
@@ -229,11 +254,11 @@ const MyForm = () => {
             }
         } else {
             obj.id = id
-            console.log('obj', obj)
             setId(id + 1)
             data.push(obj)
             setData([...data])
             setObj(firstObject)
+            setFil(firstFilter)
             setErrors(firstError)
         }
     };
@@ -241,13 +266,41 @@ const MyForm = () => {
     useEffect(() => {
     }, [])
 
+    useEffect(() => {
+        filterData = data
+        setFilterData([...data])
+    }, [data])
+
     return (
         <>
             <div className='row border rounded m-3 bg-light'>
                 <h4>Filter Options</h4>
-                <div>First Name: <input className='text' type='text' name='filterFirstName' id='filterFname' /></div>
-                <div>Last Name: <input className='text' type='text' name='filterLastName' id='filterLname' /></div>
-                <div>E-mail address: <input className='text' type='text' name='filterEmail' id='filterEmail' /></div>
+                <div className='row border m-1 mt-1 justify-content-center align-items-center'>
+                    <div className='col '>
+                        <label className='m-1'>First Name:</label>
+                    </div>
+                    <div className='col justify-content-center align-items-center'>
+                        <input type='text' className='form-control m-1' name='firstName' value={fil.firstName} placeholder='Enter first name' onChange={(e) => handleFilter(e)} />
+                    </div>
+                </div>
+
+                <div className='row border m-1 mt-1 justify-content-center align-items-center'>
+                    <div className='col '>
+                        <label className='m-1'>Last Name:</label>
+                    </div>
+                    <div className='col'>
+                        <input type='text' className='form-control m-1' name='lastName' value={fil.lastName} placeholder='Enter last name' onChange={(e) => handleFilter(e)} />
+                    </div>
+                </div>
+
+                <div className='row border m-1 mt-1 justify-content-center align-items-center'>
+                    <div className='col'>
+                        <label className='m-1'>Email address:</label>
+                    </div>
+                    <div className='col'>
+                        <input type='text' className='form-control m-1' name='emailAddress' value={fil.emailAddress} placeholder='Enter email address' onChange={(e) => handleFilter(e)} />
+                    </div>
+                </div>
             </div>
 
             <div className='row m-0 mt-2 mb-2'>
@@ -259,7 +312,7 @@ const MyForm = () => {
                             <label className='m-1'>First Name:</label>
                         </div>
                         <div className='col justify-content-center align-items-center'>
-                            <input type='text' className='form-control' name='firstName' value={obj.firstName} placeholder='Enter your first name' onChange={(e) => valueOnChange(e)} />
+                            <input type='text' className='form-control m-1' name='firstName' value={obj.firstName} placeholder='Enter your first name' onChange={(e) => valueOnChange(e)} />
                             {errors.firstName === null ? (
                                 null
                             ) : (
@@ -344,7 +397,7 @@ const MyForm = () => {
                             <label className='m-1'>Password:</label>
                         </div>
                         <div className='col'>
-                            <input type='password' className='form-control m-1' name='password' value={obj.password} placeholder='Enter your password' onChange={(e) => valueOnChange(e)} />
+                            <input type='password' className='form-control m-1' name='password' autoComplete='new-password' value={obj.password} placeholder='Enter your password' onChange={(e) => valueOnChange(e)} />
                             {errors.password === null ? (
                                 null
                             ) : (
@@ -358,7 +411,7 @@ const MyForm = () => {
                             <label className='m-1'>Confirm password:</label>
                         </div>
                         <div className='col'>
-                            <input type='password' className='form-control m-1' name='confirmPassword' value={obj.confirmPassword} placeholder='Confirm your password' onChange={(e) => valueOnChange(e)} />
+                            <input type='password' className='form-control m-1' name='confirmPassword' autoComplete='new-password' value={obj.confirmPassword} placeholder='Confirm your password' onChange={(e) => valueOnChange(e)} />
                             {errors.confirmPassword === null ? (
                                 null
                             ) : (
@@ -422,7 +475,7 @@ const MyForm = () => {
                     </thead>
 
                     <tbody>
-                        {data?.map((item, key) => {
+                        {filterData?.map((item, key) => {
                             return <tr key={key}>
                                 <td>{item.id}</td>
                                 <td>{item.firstName}</td>
