@@ -7,11 +7,16 @@ import Counter2 from "./components/Counter2";
 
 function App() {
 	return (
-		<div className="App">
+		<div className="App row m-0">
 			{/* <ValidationForm /> */}
 			{/* <MyForm /> */}
-			<Counter1 />
-			<Counter2 />
+
+			<div className="col">
+				<Counter1 />
+			</div>
+			<div className="col">
+				<Counter2 />
+			</div>
 		</div>
 	);
 }
