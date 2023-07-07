@@ -14,19 +14,16 @@ const HigherComponent = (OriginalComponent, api) => {
             await axios.get(`${api}`)
                 .then((response) => {
                     setRes(response.data)
-                    console.log('res', res)
                 })
         }
 
         const add = () => {
             setCount(count + 1)
-            apiCall()
         }
 
         const subtract = () => {
             if (count > 0) {
                 setCount(count - 1)
-                apiCall()
             }
         }
         return <OriginalComponent add={add} subtract={subtract} count={count} res={res} />

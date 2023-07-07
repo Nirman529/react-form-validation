@@ -22,14 +22,13 @@ const Counter1 = ({ count, add, subtract, res }) => {
                     <tbody>
                         {res?.slice(count * 10, count * 10 + 10).map((item, key) => {
                             return (
-                                <tr>
+                                <tr key={key}>
                                     <td>{item.id}</td>
-                                    <td key={key}>{item.title}</td>
+                                    <td>{item.title}</td>
                                 </tr>
                             )
                         })}
                     </tbody>
-                    <div className=''></div>
                 </table>
             </div>
         </>

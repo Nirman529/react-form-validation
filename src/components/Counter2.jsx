@@ -8,7 +8,7 @@ const Counter2 = ({ count, add, subtract, res }) => {
         <>
             <div className='m-3 border rounded bg-light'>
                 <h2 className='m-1'>Comments</h2>
-                <div>Page No.: {count}</div>
+                <div>Page No.: {count + 1}</div>
                 <button className='btn btn-secondary m-1' onClick={subtract}>Previous</button>
                 <button className='btn btn-primary m-1' onClick={add}>Next</button>
                 <div>
@@ -22,7 +22,7 @@ const Counter2 = ({ count, add, subtract, res }) => {
                         <tbody>
                             {res?.slice(count * 10, count * 10 + 10).map((item, key) => {
                                 return (
-                                    <tr>
+                                    <tr key={key}>
                                         <td>{item.id}</td>
                                         <td>
                                             {item.name}
