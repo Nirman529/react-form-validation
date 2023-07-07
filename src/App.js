@@ -1,23 +1,21 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import MyForm from './components/forms';
-import ValidationForm from "./components/validationForm";
-import Counter1 from "./components/Counter1";
-import Counter2 from "./components/Counter2";
+import { useEffect, useRef } from "react";
 
 function App() {
+	const count = useRef(0)
+	useEffect(() => {
+		count.current = count.current + 1;
+	})
 	return (
-		<div className="App row m-0">
-			{/* <ValidationForm /> */}
-			{/* <MyForm /> */}
+		<>
+			<div className="App row m-0">
+				{/* <ValidationForm /> */}
+				<MyForm />
 
-			<div className="col">
-				<Counter1 />
 			</div>
-			<div className="col">
-				<Counter2 />
-			</div>
-		</div>
+		</>
 	);
 }
 
